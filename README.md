@@ -16,7 +16,7 @@
 
 ## about me
 
-I'm a full-stack developer currently working at [EVER Health GmbH](https://everhealth.de) in Germany, where I handle everything from frontend to production — feature development, backend APIs, database migrations, and AWS deployments. Alongside that, I'm pursuing my Master's in Computer Science at Philipps University of Marburg.
+I'm a full-stack developer currently working at [EVER Health GmbH](https://www.everhealth.ai/) in Germany, where I handle everything from frontend to production — feature development, backend APIs, database migrations, and AWS deployments.
 
 I care about writing code that's readable, systems that scale, and interfaces that feel good to use.
 
