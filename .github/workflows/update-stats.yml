@@ -1,0 +1,103 @@
+name: Update README stats
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # runs every day at 00:00 UTC (midnight)
+  workflow_dispatch:        # allows manual trigger from GitHub Actions tab
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout profile repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch commit count & update files
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          GH_USERNAME: Nisarg-13
+        run: |
+          python3 << 'EOF'
+          import requests
+          import re
+          import os
+          from datetime import date
+
+          username = os.environ["GH_USERNAME"]
+          token    = os.environ["GH_TOKEN"]
+          headers  = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
+
+          # ── 1. Count all commits across all repos ──────────────────────────
+          total = 0
+          page  = 1
+          while True:
+              r = requests.get(
+                  f"https://api.github.com/search/commits?q=author:{username}&per_page=100&page={page}",
+                  headers={**headers, "Accept": "application/vnd.github.cloak-preview+json"}
+              )
+              data = r.json()
+              items = data.get("items", [])
+              total += len(items)
+              if len(items) < 100:
+                  break
+              page += 1
+
+          commit_str = f"{total:,}"
+          print(f"Total commits: {commit_str}")
+
+          # ── 2. Calculate age (auto-updates every birthday) ─────────────────
+          born  = date(2002, 9, 13)
+          today = date.today()
+          age   = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+          print(f"Age: {age}")
+
+          # ── 3. Update README.md ────────────────────────────────────────────
+          with open("README.md", "r") as f:
+              readme = f.read()
+
+          # Update age between markers
+          readme = re.sub(
+              r"<!--AGE_START-->\d+<!--AGE_END-->",
+              f"<!--AGE_START-->{age}<!--AGE_END-->",
+              readme
+          )
+
+          with open("README.md", "w") as f:
+              f.write(readme)
+
+          # ── 4. Update SVG commit count ─────────────────────────────────────
+          with open("github-stats-card.svg", "r") as f:
+              svg = f.read()
+
+          svg = re.sub(
+              r"<!--COMMIT_COUNT-->.*?(?=<)",
+              f"<!--COMMIT_COUNT-->{commit_str}",
+              svg
+          )
+
+          with open("github-stats-card.svg", "w") as f:
+              f.write(svg)
+
+          print("Files updated successfully.")
+          EOF
+
+      - name: Commit & push changes
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md github-stats-card.svg
+          git diff --cached --quiet || git commit -m "chore: auto-update stats [$(date -u '+%Y-%m-%d')]"
+          git push
