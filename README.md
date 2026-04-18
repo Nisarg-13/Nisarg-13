@@ -1,30 +1,76 @@
-<h1 align="center"> Hey there, I'm Nisarg Patel</h1>
-<img align="right" alt="Coding" width="400" src="https://t3.ftcdn.net/jpg/01/78/65/02/360_F_178650212_oePgGaIhKUhz0cIg2bLBGsFsdbWs5Xwj.jpg">
+<div align="center">
 
-# 💫 About Me:
-👋 Hi, I'm Nisarg, a passionate developer with a background in Computer Engineering. I enjoy building modern, user-friendly web applications and solving real-world problems through clean and scalable code.<br/>
-💡 Currently exploring new technologies and expanding my skills in full-stack development.<br/>
-🚀 Always eager to learn, collaborate, and contribute to meaningful projects.<br/>
-💬 Reach me at: patelnisarg1309@gmail.com
+# Nisarg Patel
 
+**Full-Stack Developer · Frankfurt, Germany**
 
-## 🌐 Socials:
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nisargkumarpatel/) 
+<!--AGE_START-->23<!--AGE_END--> y/o · building scalable web apps at **EVER Health GmbH** · writing clean code by day, never by night
 
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-nisargkumarpatel-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nisargkumarpatel/)
+[![Email](https://img.shields.io/badge/Email-patelnisarg1309@gmail.com-EA4335?style=flat&logo=gmail&logoColor=white)](mailto:patelnisarg1309@gmail.com)
+[![Portfolio](https://img.shields.io/badge/Portfolio-nisarg--patel--13.vercel.app-000000?style=flat&logo=vercel&logoColor=white)](https://nisarg-patel-13.vercel.app/)
 
-# 💻 Tech Stack
+</div>
 
-![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
-![React](https://img.shields.io/badge/React-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![Node.js](https://img.shields.io/badge/Node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-![.NET Core](https://img.shields.io/badge/.NET%20Core-512BD4?style=for-the-badge&logo=.net&logoColor=white)
-![C#](https://img.shields.io/badge/C%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white)
-![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
-![Git](https://img.shields.io/badge/Git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-![Azure DevOps](https://img.shields.io/badge/Azure%20DevOps-0078D7?style=for-the-badge&logo=azure-devops&logoColor=white)
+---
+
+## about me
+
+I'm a full-stack developer currently working at [EVER Health GmbH](https://everhealth.de) in Germany, where I handle everything from frontend to production — feature development, backend APIs, database migrations, and AWS deployments. Alongside that, I'm pursuing my Master's in Computer Science at Philipps University of Marburg.
+
+I care about writing code that's readable, systems that scale, and interfaces that feel good to use.
+
+- 🏢 &nbsp;**Role** — Software Developer @ EVER Health GmbH, Lahnau
+- 🌍 &nbsp;**Based in** — Frankfurt Rhine-Main, Germany
+- 📬 &nbsp;**Reach me** — patelnisarg1309@gmail.com
+
+---
+
+## tech stack
+
+**daily drivers**
+
+<p>
+  <img src="https://skillicons.dev/icons?i=nextjs" height="40" alt="Next.js" title="Next.js" />
+  <img src="https://skillicons.dev/icons?i=react" height="40" alt="React" title="React" />
+  <img src="https://skillicons.dev/icons?i=nodejs" height="40" alt="Node.js" title="Node.js" />
+  <img src="https://skillicons.dev/icons?i=express" height="40" alt="Express" title="Express" />
+  <img src="https://skillicons.dev/icons?i=ts" height="40" alt="TypeScript" title="TypeScript" />
+  <img src="https://skillicons.dev/icons?i=postgres" height="40" alt="PostgreSQL" title="PostgreSQL" />
+  <img src="https://skillicons.dev/icons?i=prisma" height="40" alt="Prisma" title="Prisma" />
+  <img src="https://skillicons.dev/icons?i=docker" height="40" alt="Docker" title="Docker" />
+  <img src="https://skillicons.dev/icons?i=aws" height="40" alt="AWS" title="AWS" />
+  <img src="https://skillicons.dev/icons?i=tailwind" height="40" alt="Tailwind CSS" title="Tailwind CSS" />
+</p>
+
+**also worked with**
+
+<p>
+  <img src="https://skillicons.dev/icons?i=dotnet" height="40" alt=".NET Core" title=".NET Core" />
+  <img src="https://skillicons.dev/icons?i=cs" height="40" alt="C#" title="C#" />
+  <img src="https://skillicons.dev/icons?i=python" height="40" alt="Python" title="Python" />
+  <img src="https://skillicons.dev/icons?i=java" height="40" alt="Java" title="Java" />
+  <img src="https://skillicons.dev/icons?i=mongodb" height="40" alt="MongoDB" title="MongoDB" />
+  <img src="https://skillicons.dev/icons?i=redis" height="40" alt="Redis" title="Redis" />
+  <img src="https://skillicons.dev/icons?i=rabbitmq" height="40" alt="RabbitMQ" title="RabbitMQ" />
+  <img src="https://skillicons.dev/icons?i=azure" height="40" alt="Azure" title="Azure" />
+</p>
+
+---
+
+## coding stats
+
+<p align="center">
+  <img src="./github-stats-card.svg" alt="Coding Stats" width="520"/>
+</p>
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=Nisarg-13&show_icons=true&theme=github_dark&hide_border=true&count_private=true" width="48%" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Nisarg-13&theme=github-dark-blue&hide_border=true" width="48%" />
+</p>
+
+---
+
+<div align="center">
+  <sub>updated daily · <a href="https://nisarg-patel-13.vercel.app/">nisarg-patel-13.vercel.app</a></sub>
+</div>
