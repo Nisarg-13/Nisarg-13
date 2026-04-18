@@ -37,7 +37,7 @@
     <text x="99" y="210" text-anchor="middle" class="sans" font-size="10" fill="#484f58">commits by time of day</text>
 
     <text x="220" y="40" class="mono" font-size="10" font-weight="500" fill="#484f58" letter-spacing="2">CODING STATS</text>
-    <text x="220" y="74" class="mono" font-size="26" font-weight="600" fill="#e6edf3"><!--COMMIT_COUNT--></text>
+    <text x="220" y="74" class="mono" font-size="26" font-weight="600" fill="#e6edf3"><!--COMMIT_COUNT-->0</text>
     <text x="220" y="92" class="sans" font-size="12" fill="#8b949e">total commits</text>
 
     <line x1="220" y1="108" x2="504" y2="108" stroke="#21262d" stroke-width="1"/>
