@@ -2,21 +2,26 @@
 
 # Nisarg Patel
 
-**Full-Stack Developer · Frankfurt, Germany**
+**Full-Stack Developer**
 
-<!--AGE_START-->23<!--AGE_END--> y/o · building scalable full-stack features at EVER Health GmbH · writing clean code by day<br><br>
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-nisargkumarpatel-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nisargkumarpatel/)
-[![Email](https://img.shields.io/badge/Email-patelnisarg1309@gmail.com-EA4335?style=flat&logo=gmail&logoColor=white)](mailto:patelnisarg1309@gmail.com)
-[![Portfolio](https://img.shields.io/badge/Portfolio-nisarg--patel--13.vercel.app-000000?style=flat&logo=vercel&logoColor=white)](https://nisarg-patel-13.vercel.app/)
+<!--AGE_START-->23<!--AGE_END--> y/o · Building scalable full-stack features at EVER Health GmbH · Writing clean code by day<br><br>
+<a href="https://www.linkedin.com/in/nisargkumarpatel/" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/LinkedIn-nisargkumarpatel-0A66C2?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn" />
+</a>
+<a href="mailto:patelnisarg1309@gmail.com" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/Email-patelnisarg1309@gmail.com-EA4335?style=flat&logo=gmail&logoColor=white" alt="Email" />
+</a>
+<a href="https://nisarg-patel-13.vercel.app/" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/Portfolio-nisarg--patel--13.vercel.app-000000?style=flat&logo=vercel&logoColor=white" alt="Portfolio" />
+</a>
 
 </div>
 
 ---
 
-## about me
+## About me
 
-I'm a full-stack developer currently working at [EVER Health GmbH](https://www.linkedin.com/company/ever-health-ai/) in Germany, where I handle everything from frontend to production — feature development, backend APIs, database migrations, and AWS deployments.
+I'm a full-stack developer currently working at <a href="https://www.linkedin.com/company/ever-health-ai/" target="_blank" rel="noopener noreferrer">EVER Health GmbH</a> in Germany, where I handle everything from frontend to production — feature development, backend APIs, database migrations, and AWS deployments.
 
 I care about writing code that's readable, systems that scale, and interfaces that feel good to use.
 
@@ -26,9 +31,9 @@ I care about writing code that's readable, systems that scale, and interfaces th
 
 ---
 
-## tech stack
+## Tech stack
 
-**daily drivers**
+**Daily drivers**
 
 <p>
   <img src="https://skillicons.dev/icons?i=nextjs" height="40" alt="Next.js" title="Next.js" />
@@ -43,7 +48,7 @@ I care about writing code that's readable, systems that scale, and interfaces th
   <img src="https://skillicons.dev/icons?i=tailwind" height="40" alt="Tailwind CSS" title="Tailwind CSS" />
 </p>
 
-**also worked with**
+**Also worked with**
 
 <p>
   <img src="https://skillicons.dev/icons?i=dotnet" height="40" alt=".NET Core" title=".NET Core" />
@@ -58,9 +63,8 @@ I care about writing code that's readable, systems that scale, and interfaces th
 
 ---
 
-## coding stats
+## Coding stats
 <!--START_SECTION:waka-->
-**I'm an Early 🐤** 
 
 ```text
 🌞 Morning                123038 commits      ███████░░░░░░░░░░░░░░░░░░   27.48 % 
@@ -81,8 +85,6 @@ Sunday                   56459 commits       ███░░░░░░░░�
 ```
 
 
-📊 **This Week I Spent My Time On** 
-
 ```text
 🕑︎ Time Zone: Europe/Berlin
 ```
@@ -94,5 +96,5 @@ Sunday                   56459 commits       ███░░░░░░░░�
 ---
 
 <div align="center">
-  <sub>updated daily · <a href="https://nisarg-patel-13.vercel.app/">nisarg-patel-13.vercel.app</a></sub>
+  <sub>updated daily · <a href="https://nisarg-patel-13.vercel.app/" target="_blank" rel="noopener noreferrer">nisarg-patel-13.vercel.app</a></sub>
 </div>
