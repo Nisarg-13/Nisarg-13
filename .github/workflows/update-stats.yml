@@ -62,6 +62,7 @@ jobs:
               while True:
                   r = gh_get(url, p)
                   if r.status_code != 200:
+                      print(f"  Warning: {url} → {r.status_code}")
                       break
                   batch = r.json()
                   if not isinstance(batch, list) or not batch:
@@ -74,26 +75,46 @@ jobs:
 
           # ── 1. collect every repo ──────────────────────────────────────────
           print("Fetching repos …")
-          repos = {r["full_name"] for r in all_pages(
+          repos = set()
+
+          # All repos the authenticated user can access
+          for r in all_pages(
               "https://api.github.com/user/repos",
-              {"affiliation": "owner,collaborator,organization_member", "type": "all"}
-          )}
-          for org in all_pages("https://api.github.com/user/orgs"):
+              {"affiliation": "owner,collaborator,organization_member",
+               "type": "all", "visibility": "all"}
+          ):
+              repos.add(r["full_name"])
+
+          # Public repos directly on the user profile (catches forks etc.)
+          for r in all_pages(
+              f"https://api.github.com/users/{username}/repos",
+              {"type": "all"}
+          ):
+              repos.add(r["full_name"])
+
+          # All orgs the user belongs to → fetch all their repos
+          orgs = all_pages("https://api.github.com/user/orgs")
+          for org in orgs:
+              print(f"  Found org: {org['login']}")
               for r in all_pages(
                   f"https://api.github.com/orgs/{org['login']}/repos",
                   {"type": "all"}
               ):
                   repos.add(r["full_name"])
-          print(f"Found {len(repos)} repos")
+
+          print(f"Found {len(repos)} repos total")
+          for repo in sorted(repos):
+              print(f"  - {repo}")
 
           # ── 2. count commits + collect timestamps ──────────────────────────
-          print("Counting commits …")
-          total        = 0
-          hour_counts  = defaultdict(int)   # 0-23  (Berlin local hour)
-          day_counts   = defaultdict(int)   # 0=Mon … 6=Sun
+          print("\nCounting commits …")
+          total       = 0
+          hour_counts = defaultdict(int)
+          day_counts  = defaultdict(int)
 
           for repo in sorted(repos):
               page = 1
+              repo_count = 0
               while True:
                   r = gh_get(
                       f"https://api.github.com/repos/{repo}/commits",
@@ -110,7 +131,7 @@ jobs:
 
                   for commit in batch:
                       total += 1
-                      # parse commit timestamp → Berlin local time
+                      repo_count += 1
                       raw = (commit.get("commit", {})
                                    .get("author", {})
                                    .get("date", ""))
@@ -127,18 +148,17 @@ jobs:
                       break
                   page += 1
 
-          print(f"Total commits: {total:,}")
+              if repo_count:
+                  print(f"  {repo}: {repo_count} commits")
 
-          # ── 3. time-of-day buckets (Berlin local time) ─────────────────────
-          #   Morning  06:00-11:59
-          #   Daytime  12:00-17:59
-          #   Evening  18:00-23:59
-          #   Night    00:00-05:59
-          morning = sum(hour_counts[h] for h in range(6,  12))
-          daytime = sum(hour_counts[h] for h in range(12, 18))
-          evening = sum(hour_counts[h] for h in range(18, 24))
-          night   = sum(hour_counts[h] for h in range(0,   6))
-          tod_total = morning + daytime + evening + night or 1  # avoid div/0
+          print(f"\nTotal commits: {total:,}")
+
+          # ── 3. time-of-day buckets ─────────────────────────────────────────
+          morning   = sum(hour_counts[h] for h in range(6,  12))
+          daytime   = sum(hour_counts[h] for h in range(12, 18))
+          evening   = sum(hour_counts[h] for h in range(18, 24))
+          night     = sum(hour_counts[h] for h in range(0,   6))
+          tod_total = morning + daytime + evening + night or 1
 
           def pct(n): return round(n / tod_total * 100, 2)
           def k(n):
@@ -148,29 +168,24 @@ jobs:
 
           d_pct = pct(daytime); m_pct = pct(morning)
           e_pct = pct(evening); n_pct = pct(night)
-          print(f"Daytime {d_pct}% Morning {m_pct}% Evening {e_pct}% Night {n_pct}%")
+          print(f"Daytime {d_pct}%  Morning {m_pct}%  Evening {e_pct}%  Night {n_pct}%")
 
           # ── 4. peak day ────────────────────────────────────────────────────
-          days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-          peak_day = days[max(day_counts, key=day_counts.get)] if day_counts else "Tuesday"
+          days     = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+          peak_day = days[max(day_counts, key=day_counts.get)] if day_counts else "Thursday"
           print(f"Peak day: {peak_day}")
 
-          # ── 5. donut arc lengths (circumference = 2π×58 ≈ 364.42) ─────────
+          # ── 5. donut arc lengths (circumference = 2π×58 ≈ 364.42) ──────────
           C = 364.42
           def arc(p): return round(C * p / 100, 1)
 
-          # arcs stack clockwise starting from top (-90° offset)
-          # order drawn (back→front): night, evening, morning, daytime
-          # each segment's dashoffset shifts it to start after previous segments
           night_arc   = arc(n_pct)
           evening_arc = arc(e_pct)
           morning_arc = arc(m_pct)
           daytime_arc = arc(d_pct)
 
-          # dashoffset = -(sum of arcs drawn BEFORE this one)
-          # night starts at 0 (top), so offset = 0 means it starts right at top
           night_off   = 0
-          evening_off = round(-(night_arc), 1)
+          evening_off = round(-night_arc, 1)
           morning_off = round(-(night_arc + evening_arc), 1)
           daytime_off = round(-(night_arc + evening_arc + morning_arc), 1)
 
@@ -179,7 +194,7 @@ jobs:
           today = date.today()
           age   = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
-          # ── 7. build replacement map ───────────────────────────────────────
+          # ── 7. replacement map ─────────────────────────────────────────────
           replacements = {
               "<!--COMMIT_COUNT-->": f"{total:,}",
               "<!--DAYTIME_PCT-->":  str(d_pct),
@@ -220,7 +235,7 @@ jobs:
           with open("README.md", "w") as f:
               f.write(readme)
 
-          print("All files updated successfully.")
+          print("\nAll files updated successfully.")
           EOF
 
       - name: Commit & push
