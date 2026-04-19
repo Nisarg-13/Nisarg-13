@@ -4,16 +4,22 @@ on:
   # for manual workflow trigger
   workflow_dispatch:
   schedule:
-    # runs at 12 AM UTC (5:30 AM IST)
+    # runs every day at 12 AM UTC (5:30 AM IST)
     - cron: "0 0 * * *"
+
+permissions:
+  contents: write
 
 jobs:
   update-readme:
     name: Update Readme with Metrics
     env:
-          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+      WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - uses: anmol098/waka-readme-stats@master
         with:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
