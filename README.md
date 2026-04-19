@@ -66,6 +66,8 @@ I care about writing code that's readable, systems that scale, and interfaces th
 ## Coding stats
 <!--START_SECTION:waka-->
 
+**Total Commits:** 223944
+
 ```text
 🌞 Morning                96912 commits       ███████████░░░░░░░░░░░░░░   43.28 % 
 🌆 Daytime                111055 commits      ████████████░░░░░░░░░░░░░   49.59 % 

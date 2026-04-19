@@ -37,3 +37,47 @@ jobs:
           SHOW_LANGUAGE_PER_REPO: "False"
           SHOW_SHORT_INFO: "False"
           SHOW_LOC_CHART: "False"
+
+      - name: Add total commits line
+        run: |
+          total_commits=$(awk '
+            /<!--START_SECTION:waka-->/, /<!--END_SECTION:waka-->/ {
+              if ($0 ~ /(Morning|Daytime|Evening|Night)/ && $0 ~ /commits/) {
+                count = $3
+                gsub(/,/, "", count)
+                sum += count
+              }
+            }
+            END { print sum + 0 }
+          ' README.md)
+
+          awk -v total="$total_commits" '
+            BEGIN { inserted = 0 }
+            {
+              print
+              if ($0 ~ /<!--START_SECTION:waka-->/) {
+                if (getline nextline) {
+                  if (nextline ~ /^\*\*Total Commits:\*\*/ || nextline ~ /^Total Commits:/) {
+                    print "**Total Commits:** " total
+                  } else {
+                    print "**Total Commits:** " total
+                    print nextline
+                  }
+                }
+                inserted = 1
+              }
+            }
+            END {
+              if (!inserted) {
+                print "<!--START_SECTION:waka-->"
+                print "**Total Commits:** " total
+                print "<!--END_SECTION:waka-->"
+              }
+            }
+          ' README.md > README.tmp && mv README.tmp README.md
+
+      - name: Commit total commits update
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: add total commits to waka section"
+          file_pattern: README.md
