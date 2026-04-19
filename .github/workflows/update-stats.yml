@@ -2,8 +2,8 @@ name: Update README stats
 
 on:
   schedule:
-    - cron: '0 0 * * *'   # runs every day at 00:00 UTC (midnight)
-  workflow_dispatch:        # allows manual trigger from GitHub Actions tab
+    - cron: '0 0 * * *'   # every night at 00:00 UTC
+  workflow_dispatch:        # manual trigger from Actions tab
 
 jobs:
   update-stats:
@@ -23,48 +23,45 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests pytz
 
-      - name: Fetch commit count & update files
+      - name: Fetch all stats & update files
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
           GH_USERNAME: Nisarg-13
         run: |
           python3 << 'EOF'
-          import requests
-          import re
-          import os
-          import time
-          from datetime import date
+          import requests, re, os, time
+          from datetime import datetime, date, timezone
+          from collections import defaultdict
+          import pytz
 
-          username = os.environ["GH_USERNAME"]
-          token    = os.environ["GH_TOKEN"]
-          headers  = {
+          username  = os.environ["GH_USERNAME"]
+          token     = os.environ["GH_TOKEN"]
+          headers   = {
               "Authorization": f"Bearer {token}",
               "Accept": "application/vnd.github+json",
               "X-GitHub-Api-Version": "2022-11-28"
           }
+          TZ = pytz.timezone("Europe/Berlin")
 
+          # ── helpers ────────────────────────────────────────────────────────
           def gh_get(url, params=None):
-              """GET with automatic rate-limit retry."""
               while True:
-                  r = requests.get(url, headers=headers, params=params)
+                  r = requests.get(url, headers=headers, params=params, timeout=30)
                   if r.status_code == 403 and "rate limit" in r.text.lower():
                       reset = int(r.headers.get("X-RateLimit-Reset", time.time() + 60))
                       wait  = max(reset - int(time.time()), 1) + 2
-                      print(f"  Rate limited — waiting {wait}s")
+                      print(f"  Rate limited — waiting {wait}s …")
                       time.sleep(wait)
                       continue
                   return r
 
-          def get_all_pages(url, params=None):
-              """Collect all items across paginated responses."""
-              items = []
-              params = {**(params or {}), "per_page": 100, "page": 1}
+          def all_pages(url, params=None):
+              items, p = [], {**(params or {}), "per_page": 100, "page": 1}
               while True:
-                  r = gh_get(url, params)
+                  r = gh_get(url, p)
                   if r.status_code != 200:
-                      print(f"  Warning: {url} returned {r.status_code}")
                       break
                   batch = r.json()
                   if not isinstance(batch, list) or not batch:
@@ -72,101 +69,161 @@ jobs:
                   items.extend(batch)
                   if len(batch) < 100:
                       break
-                  params["page"] += 1
+                  p["page"] += 1
               return items
 
-          # ── 1. Collect every repo the user owns or is a member of ──────────
-          print("Fetching repos...")
-
-          # Personal repos (public + private + org member repos)
-          personal = get_all_pages(
+          # ── 1. collect every repo ──────────────────────────────────────────
+          print("Fetching repos …")
+          repos = {r["full_name"] for r in all_pages(
               "https://api.github.com/user/repos",
               {"affiliation": "owner,collaborator,organization_member", "type": "all"}
-          )
-          repo_full_names = {r["full_name"] for r in personal}
-
-          # Orgs the user belongs to — grab all their repos too
-          orgs = get_all_pages("https://api.github.com/user/orgs")
-          for org in orgs:
-              org_repos = get_all_pages(
+          )}
+          for org in all_pages("https://api.github.com/user/orgs"):
+              for r in all_pages(
                   f"https://api.github.com/orgs/{org['login']}/repos",
                   {"type": "all"}
-              )
-              for r in org_repos:
-                  repo_full_names.add(r["full_name"])
+              ):
+                  repos.add(r["full_name"])
+          print(f"Found {len(repos)} repos")
 
-          print(f"Found {len(repo_full_names)} repos total")
+          # ── 2. count commits + collect timestamps ──────────────────────────
+          print("Counting commits …")
+          total        = 0
+          hour_counts  = defaultdict(int)   # 0-23  (Berlin local hour)
+          day_counts   = defaultdict(int)   # 0=Mon … 6=Sun
 
-          # ── 2. Count commits authored by user in every repo ────────────────
-          print("Counting commits (this may take a minute)...")
-          total = 0
-
-          for repo in sorted(repo_full_names):
-              count = 0
-              page  = 1
+          for repo in sorted(repos):
+              page = 1
               while True:
                   r = gh_get(
                       f"https://api.github.com/repos/{repo}/commits",
                       {"author": username, "per_page": 100, "page": page}
                   )
-                  if r.status_code == 409:   # empty repo
-                      break
-                  if r.status_code == 404:   # no access
+                  if r.status_code in (404, 409):
                       break
                   if r.status_code != 200:
-                      print(f"  Skipping {repo}: HTTP {r.status_code}")
+                      print(f"  skip {repo}: {r.status_code}")
                       break
                   batch = r.json()
                   if not isinstance(batch, list) or not batch:
                       break
-                  count += len(batch)
+
+                  for commit in batch:
+                      total += 1
+                      # parse commit timestamp → Berlin local time
+                      raw = (commit.get("commit", {})
+                                   .get("author", {})
+                                   .get("date", ""))
+                      if raw:
+                          try:
+                              dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+                              local_dt = dt.astimezone(TZ)
+                              hour_counts[local_dt.hour] += 1
+                              day_counts[local_dt.weekday()] += 1
+                          except Exception:
+                              pass
+
                   if len(batch) < 100:
                       break
                   page += 1
 
-              if count:
-                  print(f"  {repo}: {count}")
-              total += count
+          print(f"Total commits: {total:,}")
 
-          commit_str = f"{total:,}"
-          print(f"\nTotal commits across all repos: {commit_str}")
+          # ── 3. time-of-day buckets (Berlin local time) ─────────────────────
+          #   Morning  06:00-11:59
+          #   Daytime  12:00-17:59
+          #   Evening  18:00-23:59
+          #   Night    00:00-05:59
+          morning = sum(hour_counts[h] for h in range(6,  12))
+          daytime = sum(hour_counts[h] for h in range(12, 18))
+          evening = sum(hour_counts[h] for h in range(18, 24))
+          night   = sum(hour_counts[h] for h in range(0,   6))
+          tod_total = morning + daytime + evening + night or 1  # avoid div/0
 
-          # ── 3. Calculate age (auto-updates every birthday) ─────────────────
+          def pct(n): return round(n / tod_total * 100, 2)
+          def k(n):
+              if n >= 1_000_000: return f"{n/1_000_000:.1f}M"
+              if n >= 1_000:     return f"{round(n/1000)}K"
+              return str(n)
+
+          d_pct = pct(daytime); m_pct = pct(morning)
+          e_pct = pct(evening); n_pct = pct(night)
+          print(f"Daytime {d_pct}% Morning {m_pct}% Evening {e_pct}% Night {n_pct}%")
+
+          # ── 4. peak day ────────────────────────────────────────────────────
+          days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+          peak_day = days[max(day_counts, key=day_counts.get)] if day_counts else "Tuesday"
+          print(f"Peak day: {peak_day}")
+
+          # ── 5. donut arc lengths (circumference = 2π×58 ≈ 364.42) ─────────
+          C = 364.42
+          def arc(p): return round(C * p / 100, 1)
+
+          # arcs stack clockwise starting from top (-90° offset)
+          # order drawn (back→front): night, evening, morning, daytime
+          # each segment's dashoffset shifts it to start after previous segments
+          night_arc   = arc(n_pct)
+          evening_arc = arc(e_pct)
+          morning_arc = arc(m_pct)
+          daytime_arc = arc(d_pct)
+
+          # dashoffset = -(sum of arcs drawn BEFORE this one)
+          # night starts at 0 (top), so offset = 0 means it starts right at top
+          night_off   = 0
+          evening_off = round(-(night_arc), 1)
+          morning_off = round(-(night_arc + evening_arc), 1)
+          daytime_off = round(-(night_arc + evening_arc + morning_arc), 1)
+
+          # ── 6. age ─────────────────────────────────────────────────────────
           born  = date(2002, 9, 13)
           today = date.today()
           age   = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
-          print(f"Age: {age}")
 
-          # ── 4. Update README.md ────────────────────────────────────────────
+          # ── 7. build replacement map ───────────────────────────────────────
+          replacements = {
+              "<!--COMMIT_COUNT-->": f"{total:,}",
+              "<!--DAYTIME_PCT-->":  str(d_pct),
+              "<!--MORNING_PCT-->":  str(m_pct),
+              "<!--EVENING_PCT-->":  str(e_pct),
+              "<!--NIGHT_PCT-->":    str(n_pct),
+              "<!--DAYTIME_K-->":    k(daytime),
+              "<!--MORNING_K-->":    k(morning),
+              "<!--EVENING_K-->":    k(evening),
+              "<!--NIGHT_K-->":      k(night),
+              "<!--DAYTIME_ARC-->":  str(daytime_arc),
+              "<!--MORNING_ARC-->":  str(morning_arc),
+              "<!--EVENING_ARC-->":  str(evening_arc),
+              "<!--NIGHT_ARC-->":    str(night_arc),
+              "<!--DAYTIME_OFF-->":  str(daytime_off),
+              "<!--MORNING_OFF-->":  str(morning_off),
+              "<!--EVENING_OFF-->":  str(evening_off),
+              "<!--NIGHT_OFF-->":    str(night_off),
+              "<!--PEAK_DAY-->":     peak_day,
+          }
+
+          # ── 8. update SVG ──────────────────────────────────────────────────
+          with open("github-stats-card.svg", "r") as f:
+              svg = f.read()
+          for placeholder, value in replacements.items():
+              svg = svg.replace(placeholder, value)
+          with open("github-stats-card.svg", "w") as f:
+              f.write(svg)
+
+          # ── 9. update README age ───────────────────────────────────────────
           with open("README.md", "r") as f:
               readme = f.read()
-
           readme = re.sub(
               r"<!--AGE_START-->\d+<!--AGE_END-->",
               f"<!--AGE_START-->{age}<!--AGE_END-->",
               readme
           )
-
           with open("README.md", "w") as f:
               f.write(readme)
 
-          # ── 5. Update SVG commit count ─────────────────────────────────────
-          with open("github-stats-card.svg", "r") as f:
-              svg = f.read()
-
-          svg = re.sub(
-              r"<!--COMMIT_COUNT-->.*?(?=<)",
-              f"<!--COMMIT_COUNT-->{commit_str}",
-              svg
-          )
-
-          with open("github-stats-card.svg", "w") as f:
-              f.write(svg)
-
-          print("Files updated successfully.")
+          print("All files updated successfully.")
           EOF
 
-      - name: Commit & push changes
+      - name: Commit & push
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
