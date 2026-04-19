@@ -34,41 +34,113 @@ jobs:
           import requests
           import re
           import os
+          import time
           from datetime import date
 
           username = os.environ["GH_USERNAME"]
           token    = os.environ["GH_TOKEN"]
-          headers  = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
+          headers  = {
+              "Authorization": f"Bearer {token}",
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28"
+          }
 
-          # ── 1. Count all commits across all repos ──────────────────────────
-          total = 0
-          page  = 1
-          while True:
-              r = requests.get(
-                  f"https://api.github.com/search/commits?q=author:{username}&per_page=100&page={page}",
-                  headers={**headers, "Accept": "application/vnd.github.cloak-preview+json"}
+          def gh_get(url, params=None):
+              """GET with automatic rate-limit retry."""
+              while True:
+                  r = requests.get(url, headers=headers, params=params)
+                  if r.status_code == 403 and "rate limit" in r.text.lower():
+                      reset = int(r.headers.get("X-RateLimit-Reset", time.time() + 60))
+                      wait  = max(reset - int(time.time()), 1) + 2
+                      print(f"  Rate limited — waiting {wait}s")
+                      time.sleep(wait)
+                      continue
+                  return r
+
+          def get_all_pages(url, params=None):
+              """Collect all items across paginated responses."""
+              items = []
+              params = {**(params or {}), "per_page": 100, "page": 1}
+              while True:
+                  r = gh_get(url, params)
+                  if r.status_code != 200:
+                      print(f"  Warning: {url} returned {r.status_code}")
+                      break
+                  batch = r.json()
+                  if not isinstance(batch, list) or not batch:
+                      break
+                  items.extend(batch)
+                  if len(batch) < 100:
+                      break
+                  params["page"] += 1
+              return items
+
+          # ── 1. Collect every repo the user owns or is a member of ──────────
+          print("Fetching repos...")
+
+          # Personal repos (public + private + org member repos)
+          personal = get_all_pages(
+              "https://api.github.com/user/repos",
+              {"affiliation": "owner,collaborator,organization_member", "type": "all"}
+          )
+          repo_full_names = {r["full_name"] for r in personal}
+
+          # Orgs the user belongs to — grab all their repos too
+          orgs = get_all_pages("https://api.github.com/user/orgs")
+          for org in orgs:
+              org_repos = get_all_pages(
+                  f"https://api.github.com/orgs/{org['login']}/repos",
+                  {"type": "all"}
               )
-              data = r.json()
-              items = data.get("items", [])
-              total += len(items)
-              if len(items) < 100:
-                  break
-              page += 1
+              for r in org_repos:
+                  repo_full_names.add(r["full_name"])
+
+          print(f"Found {len(repo_full_names)} repos total")
+
+          # ── 2. Count commits authored by user in every repo ────────────────
+          print("Counting commits (this may take a minute)...")
+          total = 0
+
+          for repo in sorted(repo_full_names):
+              count = 0
+              page  = 1
+              while True:
+                  r = gh_get(
+                      f"https://api.github.com/repos/{repo}/commits",
+                      {"author": username, "per_page": 100, "page": page}
+                  )
+                  if r.status_code == 409:   # empty repo
+                      break
+                  if r.status_code == 404:   # no access
+                      break
+                  if r.status_code != 200:
+                      print(f"  Skipping {repo}: HTTP {r.status_code}")
+                      break
+                  batch = r.json()
+                  if not isinstance(batch, list) or not batch:
+                      break
+                  count += len(batch)
+                  if len(batch) < 100:
+                      break
+                  page += 1
+
+              if count:
+                  print(f"  {repo}: {count}")
+              total += count
 
           commit_str = f"{total:,}"
-          print(f"Total commits: {commit_str}")
+          print(f"\nTotal commits across all repos: {commit_str}")
 
-          # ── 2. Calculate age (auto-updates every birthday) ─────────────────
+          # ── 3. Calculate age (auto-updates every birthday) ─────────────────
           born  = date(2002, 9, 13)
           today = date.today()
           age   = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
           print(f"Age: {age}")
 
-          # ── 3. Update README.md ────────────────────────────────────────────
+          # ── 4. Update README.md ────────────────────────────────────────────
           with open("README.md", "r") as f:
               readme = f.read()
 
-          # Update age between markers
           readme = re.sub(
               r"<!--AGE_START-->\d+<!--AGE_END-->",
               f"<!--AGE_START-->{age}<!--AGE_END-->",
@@ -78,7 +150,7 @@ jobs:
           with open("README.md", "w") as f:
               f.write(readme)
 
-          # ── 4. Update SVG commit count ─────────────────────────────────────
+          # ── 5. Update SVG commit count ─────────────────────────────────────
           with open("github-stats-card.svg", "r") as f:
               svg = f.read()
 
