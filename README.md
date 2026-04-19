@@ -4,7 +4,7 @@
 
 **Full-Stack Developer · Frankfurt, Germany**
 
-<!--AGE_START-->23<!--AGE_END--> y/o · building scalable full-stack features at EVER Health GmbH · writing clean code by day
+<!--AGE_START-->23<!--AGE_END--> y/o · building scalable full-stack features at EVER Health GmbH · writing clean code by day<br><br>
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-nisargkumarpatel-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nisargkumarpatel/)
 [![Email](https://img.shields.io/badge/Email-patelnisarg1309@gmail.com-EA4335?style=flat&logo=gmail&logoColor=white)](mailto:patelnisarg1309@gmail.com)
