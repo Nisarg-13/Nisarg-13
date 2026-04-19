@@ -59,15 +59,9 @@ I care about writing code that's readable, systems that scale, and interfaces th
 ---
 
 ## coding stats
-
-<p align="center">
-  <img src="./github-stats-card.svg" alt="Coding Stats" width="520"/>
-</p>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Nisarg-13&show_icons=true&theme=github_dark&hide_border=true&count_private=true" width="48%" />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Nisarg-13&theme=github-dark-blue&hide_border=true" width="48%" />
-</p>
+<!--START_SECTION:waka-->
+ABCD
+<!--END_SECTION:waka-->
 
 ---
 

@@ -1,8 +1,8 @@
 name: Update README stats
 
 on:
-  schedule:
-    - cron: '0 0 * * *'   # every night at 00:00 UTC
+    #   schedule:
+    #     - cron: '0 0 * * *'   # every night at 00:00 UTC
   workflow_dispatch:        # manual trigger from Actions tab
 
 jobs:
