@@ -10,6 +10,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: waka-readme-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   update-readme:
     name: Update Readme with Metrics
@@ -19,6 +23,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
 
       - uses: anmol098/waka-readme-stats@master
         with:
@@ -75,6 +82,11 @@ jobs:
               }
             }
           ' README.md > README.tmp && mv README.tmp README.md
+
+      - name: Sync with remote before commit
+        run: |
+          git fetch origin "${GITHUB_REF_NAME}"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
 
       - name: Commit total commits update
         uses: stefanzweifel/git-auto-commit-action@v5
