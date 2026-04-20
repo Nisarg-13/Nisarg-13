@@ -45,7 +45,7 @@ jobs:
           SHOW_SHORT_INFO: "False"
           SHOW_LOC_CHART: "False"
 
-      - name: Add total commits line
+      - name: Update total commits line
         run: |
           total_commits=$(awk '
             /<!--START_SECTION:waka-->/, /<!--END_SECTION:waka-->/ {
@@ -59,26 +59,30 @@ jobs:
           ' README.md)
 
           awk -v total="$total_commits" '
-            BEGIN { inserted = 0 }
+            BEGIN { in_block = 0; found_start = 0; found_end = 0 }
             {
-              print
-              if ($0 ~ /<!--START_SECTION:waka-->/) {
-                if (getline nextline) {
-                  if (nextline ~ /^\*\*Total Commits:\*\*/ || nextline ~ /^Total Commits:/) {
-                    print "**Total Commits:** " total
-                  } else {
-                    print "**Total Commits:** " total
-                    print nextline
-                  }
-                }
-                inserted = 1
+              if ($0 ~ /<!--TOTAL_COMMITS_START-->/) {
+                print
+                print "**Total Commits:** " total
+                in_block = 1
+                found_start = 1
+                next
               }
+
+              if ($0 ~ /<!--TOTAL_COMMITS_END-->/) {
+                in_block = 0
+                found_end = 1
+                print
+                next
+              }
+
+              if (!in_block) print
             }
             END {
-              if (!inserted) {
-                print "<!--START_SECTION:waka-->"
+              if (!found_start || !found_end) {
+                print "<!--TOTAL_COMMITS_START-->"
                 print "**Total Commits:** " total
-                print "<!--END_SECTION:waka-->"
+                print "<!--TOTAL_COMMITS_END-->"
               }
             }
           ' README.md > README.tmp && mv README.tmp README.md
