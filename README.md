@@ -65,6 +65,8 @@ I care about writing code that's readable, systems that scale, and interfaces th
 
 ## Coding stats
 <!--START_SECTION:waka-->
+**Total Commits:** 223947
+
 **I'm an Early 🐤** 
 
 ```text
