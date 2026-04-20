@@ -65,12 +65,11 @@ I care about writing code that's readable, systems that scale, and interfaces th
 
 ## Coding stats
 <!--START_SECTION:waka-->
-
-**Total Commits:** 223944
+**I'm an Early 🐤** 
 
 ```text
-🌞 Morning                96912 commits       ███████████░░░░░░░░░░░░░░   43.28 % 
-🌆 Daytime                111055 commits      ████████████░░░░░░░░░░░░░   49.59 % 
+🌞 Morning                96912 commits       ███████████░░░░░░░░░░░░░░   43.27 % 
+🌆 Daytime                111058 commits      ████████████░░░░░░░░░░░░░   49.59 % 
 🌃 Evening                15332 commits       ██░░░░░░░░░░░░░░░░░░░░░░░   06.85 % 
 🌙 Night                  645 commits         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.29 % 
 ```
@@ -80,19 +79,21 @@ I care about writing code that's readable, systems that scale, and interfaces th
 Monday                   37579 commits       ████░░░░░░░░░░░░░░░░░░░░░   16.78 % 
 Tuesday                  49985 commits       ██████░░░░░░░░░░░░░░░░░░░   22.32 % 
 Wednesday                50440 commits       ██████░░░░░░░░░░░░░░░░░░░   22.52 % 
-Thursday                 51429 commits       ██████░░░░░░░░░░░░░░░░░░░   22.97 % 
+Thursday                 51429 commits       ██████░░░░░░░░░░░░░░░░░░░   22.96 % 
 Friday                   30993 commits       ███░░░░░░░░░░░░░░░░░░░░░░   13.84 % 
 Saturday                 740 commits         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.33 % 
-Sunday                   2778 commits        ░░░░░░░░░░░░░░░░░░░░░░░░░   01.24 % 
+Sunday                   2781 commits        ░░░░░░░░░░░░░░░░░░░░░░░░░   01.24 % 
 ```
 
+
+📊 **This Week I Spent My Time On** 
 
 ```text
 🕑︎ Time Zone: Europe/Berlin
 ```
 
 
- Last Updated on 19/04/2026 14:35:47 UTC
+ Last Updated on 20/04/2026 02:25:47 UTC
 <!--END_SECTION:waka-->
 
 ---
