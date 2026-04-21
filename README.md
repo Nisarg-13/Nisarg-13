@@ -69,7 +69,6 @@ I care about writing code that's readable, systems that scale, and interfaces th
 <!--TOTAL_COMMITS_END-->
 
 <!--START_SECTION:waka-->
-**I'm an Early 🐤** 
 
 ```text
 🌞 Morning                97952 commits       ███████████░░░░░░░░░░░░░░   43.28 % 
@@ -77,6 +76,7 @@ I care about writing code that's readable, systems that scale, and interfaces th
 🌃 Evening                15506 commits       ██░░░░░░░░░░░░░░░░░░░░░░░   06.85 % 
 🌙 Night                  675 commits         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.30 % 
 ```
+
 📅 **I'm Most Productive on Thursday** 
 
 ```text
@@ -89,9 +89,6 @@ Saturday                 757 commits         ░░░░░░░░░░░�
 Sunday                   2823 commits        ░░░░░░░░░░░░░░░░░░░░░░░░░   01.25 % 
 ```
 
-
-📊 **This Week I Spent My Time On** 
-
 ```text
 🕑︎ Time Zone: Europe/Berlin
 ```
@@ -101,7 +98,3 @@ Sunday                   2823 commits        ░░░░░░░░░░░�
 <!--END_SECTION:waka-->
 
 ---
-
-<div align="center">
-  <sub>updated daily · <a href="https://nisarg-patel-13.vercel.app/" target="_blank" rel="noopener noreferrer">nisarg-patel-13.vercel.app</a></sub>
-</div>
