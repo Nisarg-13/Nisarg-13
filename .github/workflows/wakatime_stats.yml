@@ -45,6 +45,10 @@ jobs:
           SHOW_SHORT_INFO: "False"
           SHOW_LOC_CHART: "False"
 
+      - name: Remove unwanted Waka headings
+        run: |
+          awk "!/\*\*I'm an Early/ && !/\*\*This Week I Spent My Time On/" README.md > README.tmp && mv README.tmp README.md
+
       - name: Update total commits line
         run: |
           total_commits=$(awk '
