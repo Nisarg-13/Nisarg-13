@@ -69,8 +69,6 @@ I care about writing code that's readable, systems that scale, and interfaces th
 <!--TOTAL_COMMITS_END-->
 
 <!--START_SECTION:waka-->
-**I'm an Early 🐤** 
-
 ```text
 🌞 Morning                98804 commits       ███████████░░░░░░░░░░░░░░   43.29 % 
 🌆 Daytime                113097 commits      ████████████░░░░░░░░░░░░░   49.55 % 
@@ -88,9 +86,6 @@ Friday                   31638 commits       ███░░░░░░░░�
 Saturday                 771 commits         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.34 % 
 Sunday                   2858 commits        ░░░░░░░░░░░░░░░░░░░░░░░░░   01.25 % 
 ```
-
-
-📊 **This Week I Spent My Time On** 
 
 ```text
 🕑︎ Time Zone: Europe/Berlin
