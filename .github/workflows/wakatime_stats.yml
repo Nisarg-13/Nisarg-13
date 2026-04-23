@@ -47,7 +47,20 @@ jobs:
 
       - name: Remove unwanted Waka headings
         run: |
-          awk "!/\*\*I'm an Early/ && !/\*\*This Week I Spent My Time On/" README.md > README.tmp && mv README.tmp README.md
+          awk '
+            BEGIN { in_waka = 0 }
+            {
+              if ($0 ~ /<!--START_SECTION:waka-->/) in_waka = 1
+
+              if (in_waka && ($0 ~ /an Early/ || $0 ~ /This Week I Spent My Time On/)) {
+                next
+              }
+
+              print
+
+              if ($0 ~ /<!--END_SECTION:waka-->/) in_waka = 0
+            }
+          ' README.md > README.tmp && mv README.tmp README.md
 
       - name: Update total commits line
         run: |
