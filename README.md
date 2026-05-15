@@ -70,32 +70,7 @@ I care about writing code that's readable, systems that scale, and interfaces th
 
 <!--START_SECTION:waka-->
 
-```text
-🌞 Morning                102820 commits      ███████████░░░░░░░░░░░░░░   43.29 % 
-🌆 Daytime                117448 commits      ████████████░░░░░░░░░░░░░   49.45 % 
-🌃 Evening                16416 commits       ██░░░░░░░░░░░░░░░░░░░░░░░   06.91 % 
-🌙 Night                  804 commits         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.34 % 
-```
-📅 **I'm Most Productive on Thursday** 
-
-```text
-Monday                   39724 commits       ████░░░░░░░░░░░░░░░░░░░░░   16.73 % 
-Tuesday                  52892 commits       ██████░░░░░░░░░░░░░░░░░░░   22.27 % 
-Wednesday                53176 commits       ██████░░░░░░░░░░░░░░░░░░░   22.39 % 
-Thursday                 54718 commits       ██████░░░░░░░░░░░░░░░░░░░   23.04 % 
-Friday                   33097 commits       ███░░░░░░░░░░░░░░░░░░░░░░   13.94 % 
-Saturday                 861 commits         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.36 % 
-Sunday                   3020 commits        ░░░░░░░░░░░░░░░░░░░░░░░░░   01.27 % 
-```
-
-
-
-```text
-🕑︎ Time Zone: Europe/Berlin
-```
-
-
- Last Updated on 14/05/2026 02:55:14 UTC
+ Last Updated on 15/05/2026 02:51:03 UTC
 <!--END_SECTION:waka-->
 
 ---
