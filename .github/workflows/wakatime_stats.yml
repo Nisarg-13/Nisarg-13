@@ -67,13 +67,20 @@ jobs:
           total_commits=$(awk '
             /<!--START_SECTION:waka-->/, /<!--END_SECTION:waka-->/ {
               if ($0 ~ /(Morning|Daytime|Evening|Night)/ && $0 ~ /commits/) {
-                count = $3
-                gsub(/,/, "", count)
-                sum += count
+                if (match($0, /([0-9][0-9,]*)[[:space:]]+commits/, m)) {
+                  count = m[1]
+                  gsub(/,/, "", count)
+                  sum += count
+                }
               }
             }
             END { print sum + 0 }
           ' README.md)
+
+          if [ "$total_commits" -eq 0 ]; then
+            echo "Total commits not found in Waka section; skipping total update."
+            exit 0
+          fi
 
           awk -v total="$total_commits" '
             BEGIN { in_block = 0; found_start = 0; found_end = 0 }
