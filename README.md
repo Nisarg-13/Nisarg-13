@@ -69,8 +69,35 @@ I care about writing code that's readable, systems that scale, and interfaces th
 <!--TOTAL_COMMITS_END-->
 
 <!--START_SECTION:waka-->
+**I'm an Early 🐤** 
 
- Last Updated on 21/05/2026 02:57:47 UTC
+```text
+🌞 Morning                103299 commits      ███████████░░░░░░░░░░░░░░   43.27 % 
+🌆 Daytime                118082 commits      ████████████░░░░░░░░░░░░░   49.47 % 
+🌃 Evening                16509 commits       ██░░░░░░░░░░░░░░░░░░░░░░░   06.92 % 
+🌙 Night                  819 commits         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.34 % 
+```
+📅 **I'm Most Productive on Thursday** 
+
+```text
+Monday                   39911 commits       ████░░░░░░░░░░░░░░░░░░░░░   16.72 % 
+Tuesday                  53156 commits       ██████░░░░░░░░░░░░░░░░░░░   22.27 % 
+Wednesday                53416 commits       ██████░░░░░░░░░░░░░░░░░░░   22.38 % 
+Thursday                 55052 commits       ██████░░░░░░░░░░░░░░░░░░░   23.06 % 
+Friday                   33234 commits       ███░░░░░░░░░░░░░░░░░░░░░░   13.92 % 
+Saturday                 870 commits         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.36 % 
+Sunday                   3070 commits        ░░░░░░░░░░░░░░░░░░░░░░░░░   01.29 % 
+```
+
+
+📊 **This Week I Spent My Time On** 
+
+```text
+🕑︎ Time Zone: Europe/Berlin
+```
+
+
+ Last Updated on 22/05/2026 02:58:48 UTC
 <!--END_SECTION:waka-->
 
 ---
