@@ -26,7 +26,7 @@ I'm a full-stack developer currently working at <a href="https://www.linkedin.co
 I care about writing code that's readable, systems that scale, and interfaces that feel good to use.
 
 - 🏢 &nbsp;**Role** — Software Developer @ EVER Health GmbH, Lahnau
-- 🌍 &nbsp;**Based in** — Frankfurt Rhine-Main, Germany
+- 🌍 &nbsp;**Based in** — Giessen, Germany
 - 📬 &nbsp;**Reach me** — patelnisarg1309@gmail.com
 
 ---
