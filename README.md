@@ -4,7 +4,7 @@
 
 **Full-Stack Developer**
 
-<!--AGE_START-->23<!--AGE_END--> y/o · Building scalable full-stack features at EVER Health GmbH · Writing clean code by day<br><br>
+<!--AGE_START-->23<!--AGE_END--> y/o · Building scalable full-stack features at EVER Health GmbH · Writing clean code day by day<br><br>
 <a href="https://www.linkedin.com/in/nisargkumarpatel/" target="_blank" rel="noopener noreferrer">
   <img src="https://img.shields.io/badge/LinkedIn-nisargkumarpatel-0A66C2?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn" />
 </a>
