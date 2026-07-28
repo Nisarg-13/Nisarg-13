@@ -69,7 +69,6 @@ I care about writing code that's readable, systems that scale, and interfaces th
 <!--TOTAL_COMMITS_END-->
 
 <!--START_SECTION:waka-->
-![AI Code Time](http://img.shields.io/badge/AI%20Code%20Time-125%20hrs%2014%20mins-blue?style=flat)
 
 **I'm an Early 🐤** 
 
@@ -97,13 +96,6 @@ Sunday                   3456 commits        ░░░░░░░░░░░�
 ```text
 🕑︎ Time Zone: Europe/Berlin
 ```
-
-🤖 **AI Coding This Week** 
-
-```text
-No AI Coding Activity Tracked This Week
-```
-
 
  Last Updated on 28/07/2026 02:19:32 UTC
 <!--END_SECTION:waka-->

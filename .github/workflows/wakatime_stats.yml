@@ -41,6 +41,8 @@ jobs:
           SHOW_LINES_OF_CODE: "False"
           SHOW_PROFILE_VIEWS: "False"
           SHOW_TOTAL_CODE_TIME: "False"
+          SHOW_AI_CODE_TIME: "False"
+          SHOW_AI_CODING: "False"
           SHOW_LANGUAGE_PER_REPO: "False"
           SHOW_SHORT_INFO: "False"
           SHOW_LOC_CHART: "False"
@@ -48,9 +50,24 @@ jobs:
       - name: Remove unwanted Waka headings
         run: |
           awk '
-            BEGIN { in_waka = 0 }
+            BEGIN { in_waka = 0; skip_ai_block = 0 }
             {
               if ($0 ~ /<!--START_SECTION:waka-->/) in_waka = 1
+
+              if (in_waka && $0 ~ /AI Code Time/) next
+
+              if (in_waka && $0 ~ /AI Coding This Week/) {
+                skip_ai_block = 1
+                next
+              }
+
+              if (skip_ai_block) {
+                if ($0 ~ /^```$/) {
+                  skip_ai_block = 0
+                  next
+                }
+                next
+              }
 
               if (in_waka && ($0 ~ /an Early/ || $0 ~ /This Week I Spent My Time On/)) {
                 next
