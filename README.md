@@ -38,7 +38,7 @@ I care about writing code that's readable, systems that scale, and interfaces th
 <p>
   <img src="https://skillicons.dev/icons?i=nextjs" height="40" alt="Next.js" title="Next.js" />
   <img src="https://skillicons.dev/icons?i=react" height="40" alt="React" title="React" />
-  <img src="https://skillicons.dev/icons?i=reactnative" height="40" alt="React Native" title="React Native" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactnative/reactnative-original.svg" height="40" alt="React Native" title="React Native" />
   <img src="https://skillicons.dev/icons?i=nodejs" height="40" alt="Node.js" title="Node.js" />
   <img src="https://skillicons.dev/icons?i=express" height="40" alt="Express" title="Express" />
   <img src="https://skillicons.dev/icons?i=ts" height="40" alt="TypeScript" title="TypeScript" />
