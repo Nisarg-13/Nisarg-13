@@ -2,7 +2,7 @@
 
 # Nisarg Patel
 
-**Full-Stack Developer**
+**Full-Stack Engineer**
 
 <!--AGE_START-->24<!--AGE_END--> y/o · Building scalable full-stack features at EVER Health GmbH · Writing clean code day by day<br><br>
 <a href="https://www.linkedin.com/in/nisargkumarpatel/" target="_blank" rel="noopener noreferrer">
