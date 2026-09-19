@@ -21,11 +21,11 @@
 
 ## About me
 
-I'm a full-stack developer currently working at <a href="https://www.linkedin.com/company/ever-health-ai/" target="_blank" rel="noopener noreferrer">EVER Health GmbH</a> in Germany, where I handle everything from frontend to production — feature development, backend APIs, database migrations, and AWS deployments.
+I'm a full-stack engineer currently working at <a href="https://www.linkedin.com/company/ever-health-ai/" target="_blank" rel="noopener noreferrer">EVER Health GmbH</a> in Germany, where I handle everything from frontend to production — feature development, backend APIs, database migrations, and AWS deployments.
 
 I care about writing code that's readable, systems that scale, and interfaces that feel good to use.
 
-- 🏢 &nbsp;**Role** — Software Developer @ EVER Health GmbH, Lahnau
+- 🏢 &nbsp;**Role** — Full-Stack Engineer @ EVER Health GmbH, Lahnau
 - 🌍 &nbsp;**Based in** — Giessen, Germany
 - 📬 &nbsp;**Reach me** — patelnisarg1309@gmail.com
 
