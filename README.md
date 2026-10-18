@@ -2,9 +2,9 @@
 
 # Nisarg Patel
 
-**Full-Stack Engineer**
+**AI Software Engineer**
 
-<!--AGE_START-->24<!--AGE_END--> y/o · Building scalable full-stack features at EVER Health GmbH · Writing clean code day by day<br><br>
+<!--AGE_START-->24<!--AGE_END--> y/o · Building agentic AI workflows for healthcare at EVER Health GmbH · Writing clean code day by day<br><br>
 <a href="https://www.linkedin.com/in/nisargkumarpatel/" target="_blank" rel="noopener noreferrer">
   <img src="https://img.shields.io/badge/LinkedIn-nisargkumarpatel-0A66C2?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn" />
 </a>
@@ -21,13 +21,13 @@
 
 ## About me
 
-I'm a full-stack engineer currently working at <a href="https://www.linkedin.com/company/ever-health-ai/" target="_blank" rel="noopener noreferrer">EVER Health GmbH</a> in Germany, where I handle everything from frontend to production — feature development, backend APIs, database migrations, and AWS deployments.
+I'm an AI Software Engineer at <a href="https://www.linkedin.com/company/ever-health-ai/" target="_blank" rel="noopener noreferrer">EVER Health GmbH</a> in Germany, building agentic AI workflows and document-processing pipelines for healthcare. I started on the team as a full-stack developer, so I can take a feature from data model and API to interface and release.
 
 I care about writing code that's readable, systems that scale, and interfaces that feel good to use.
 
-- 🏢 &nbsp;**Role** — Full-Stack Engineer @ EVER Health GmbH, Lahnau
-- 🌍 &nbsp;**Based in** — Giessen, Germany
-- 📬 &nbsp;**Reach me** — patelnisarg1309@gmail.com
+- 🏢 &nbsp;**Role** - AI Software Engineer @ EVER Health GmbH, Lahnau
+- 🌍 &nbsp;**Based in** - Giessen, Germany
+- 📬 &nbsp;**Reach me** - patelnisarg1309@gmail.com
 
 ---
 
@@ -36,6 +36,8 @@ I care about writing code that's readable, systems that scale, and interfaces th
 **Daily drivers**
 
 <p>
+  <img src="https://skillicons.dev/icons?i=python" height="40" alt="Python" title="Python" />
+  <img src="https://skillicons.dev/icons?i=fastapi" height="40" alt="FastAPI" title="FastAPI" />
   <img src="https://skillicons.dev/icons?i=nextjs" height="40" alt="Next.js" title="Next.js" />
   <img src="https://skillicons.dev/icons?i=react" height="40" alt="React" title="React" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactnative/reactnative-original.svg" height="40" alt="React Native" title="React Native" />
@@ -46,8 +48,6 @@ I care about writing code that's readable, systems that scale, and interfaces th
   <img src="https://skillicons.dev/icons?i=tailwind" height="40" alt="Tailwind CSS" title="Tailwind CSS" />
   <img src="https://skillicons.dev/icons?i=postgres" height="40" alt="PostgreSQL" title="PostgreSQL" />
   <img src="https://skillicons.dev/icons?i=prisma" height="40" alt="Prisma" title="Prisma" />
-  <img src="https://skillicons.dev/icons?i=python" height="40" alt="Python" title="Python" />
-  <img src="https://skillicons.dev/icons?i=fastapi" height="40" alt="FastAPI" title="FastAPI" />
   <img src="https://skillicons.dev/icons?i=graphql" height="40" alt="GraphQL" title="GraphQL" />
   <img src="https://skillicons.dev/icons?i=docker" height="40" alt="Docker" title="Docker" />
   <img src="https://skillicons.dev/icons?i=aws" height="40" alt="AWS" title="AWS" />
@@ -55,6 +55,8 @@ I care about writing code that's readable, systems that scale, and interfaces th
   <img src="https://skillicons.dev/icons?i=githubactions" height="40" alt="GitHub Actions" title="GitHub Actions" />
   <img src="https://skillicons.dev/icons?i=vercel" height="40" alt="Vercel" title="Vercel" />
 </p>
+
+Currently focused on agentic AI workflows with the OpenAI Agents SDK, retrieval-augmented generation, and infrastructure as code with Terraform.
 
 **Also worked with**
 
