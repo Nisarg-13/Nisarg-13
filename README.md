@@ -33,15 +33,10 @@ I care about writing code that's readable, systems that scale, and interfaces th
 
 ## Tech stack
 
-**Daily drivers**
-
-Python, FastAPI, Next.js, React, React Native, Node.js, Express, TypeScript, JavaScript, Tailwind CSS, PostgreSQL, Prisma, GraphQL, Docker, AWS, Git, GitHub Actions, Vercel
-
-Currently focused on agentic AI workflows with the OpenAI Agents SDK, retrieval-augmented generation, and infrastructure as code with Terraform.
-
-**Also worked with**
-
-.NET Core, C#, Java, MongoDB, Redis, RabbitMQ, Azure, Stripe
+- **AI and backend:** Python, FastAPI, OpenAI Agents SDK, Node.js, Express, PostgreSQL, Prisma
+- **Frontend and mobile:** TypeScript, React, Next.js, React Native, Tailwind CSS
+- **Cloud and DevOps:** AWS, Docker, Terraform, GitHub Actions, Vercel
+- **Also worked with:** .NET Core, C#, Java, GraphQL, MongoDB, Redis, RabbitMQ, Azure, Stripe
 
 ---
 
