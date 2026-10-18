@@ -35,41 +35,13 @@ I care about writing code that's readable, systems that scale, and interfaces th
 
 **Daily drivers**
 
-<p>
-  <img src="https://skillicons.dev/icons?i=python" height="40" alt="Python" title="Python" />
-  <img src="https://skillicons.dev/icons?i=fastapi" height="40" alt="FastAPI" title="FastAPI" />
-  <img src="https://skillicons.dev/icons?i=nextjs" height="40" alt="Next.js" title="Next.js" />
-  <img src="https://skillicons.dev/icons?i=react" height="40" alt="React" title="React" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactnative/reactnative-original.svg" height="40" alt="React Native" title="React Native" />
-  <img src="https://skillicons.dev/icons?i=nodejs" height="40" alt="Node.js" title="Node.js" />
-  <img src="https://skillicons.dev/icons?i=express" height="40" alt="Express" title="Express" />
-  <img src="https://skillicons.dev/icons?i=ts" height="40" alt="TypeScript" title="TypeScript" />
-  <img src="https://skillicons.dev/icons?i=js" height="40" alt="JavaScript" title="JavaScript" />
-  <img src="https://skillicons.dev/icons?i=tailwind" height="40" alt="Tailwind CSS" title="Tailwind CSS" />
-  <img src="https://skillicons.dev/icons?i=postgres" height="40" alt="PostgreSQL" title="PostgreSQL" />
-  <img src="https://skillicons.dev/icons?i=prisma" height="40" alt="Prisma" title="Prisma" />
-  <img src="https://skillicons.dev/icons?i=graphql" height="40" alt="GraphQL" title="GraphQL" />
-  <img src="https://skillicons.dev/icons?i=docker" height="40" alt="Docker" title="Docker" />
-  <img src="https://skillicons.dev/icons?i=aws" height="40" alt="AWS" title="AWS" />
-  <img src="https://skillicons.dev/icons?i=git" height="40" alt="Git" title="Git" />
-  <img src="https://skillicons.dev/icons?i=githubactions" height="40" alt="GitHub Actions" title="GitHub Actions" />
-  <img src="https://skillicons.dev/icons?i=vercel" height="40" alt="Vercel" title="Vercel" />
-</p>
+Python, FastAPI, Next.js, React, React Native, Node.js, Express, TypeScript, JavaScript, Tailwind CSS, PostgreSQL, Prisma, GraphQL, Docker, AWS, Git, GitHub Actions, Vercel
 
 Currently focused on agentic AI workflows with the OpenAI Agents SDK, retrieval-augmented generation, and infrastructure as code with Terraform.
 
 **Also worked with**
 
-<p>
-  <img src="https://skillicons.dev/icons?i=dotnet" height="40" alt=".NET Core" title=".NET Core" />
-  <img src="https://skillicons.dev/icons?i=cs" height="40" alt="C#" title="C#" />
-  <img src="https://skillicons.dev/icons?i=java" height="40" alt="Java" title="Java" />
-  <img src="https://skillicons.dev/icons?i=mongodb" height="40" alt="MongoDB" title="MongoDB" />
-  <img src="https://skillicons.dev/icons?i=redis" height="40" alt="Redis" title="Redis" />
-  <img src="https://skillicons.dev/icons?i=rabbitmq" height="40" alt="RabbitMQ" title="RabbitMQ" />
-  <img src="https://skillicons.dev/icons?i=azure" height="40" alt="Azure" title="Azure" />
-  <img src="https://skillicons.dev/icons?i=stripe" height="40" alt="Stripe" title="Stripe" />
-</p>
+.NET Core, C#, Java, MongoDB, Redis, RabbitMQ, Azure, Stripe
 
 ---
 
