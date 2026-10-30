@@ -42,11 +42,10 @@ I care about writing code that's readable, systems that scale, and interfaces th
 
 ## Coding stats
 <!--TOTAL_COMMITS_START-->
-**Total Commits:** 534874
+**Total Commits:** 551872
 <!--TOTAL_COMMITS_END-->
 
 <!--START_SECTION:waka-->
-**I'm an Early 🐤** 
 
 ```text
 🌞 Morning                233553 commits      ███████████░░░░░░░░░░░░░░   42.15 % 
@@ -67,7 +66,6 @@ Sunday                   7171 commits        ░░░░░░░░░░░�
 ```
 
 
-📊 **This Week I Spent My Time On** 
 
 ```text
 🕑︎ Time Zone: Europe/Berlin
