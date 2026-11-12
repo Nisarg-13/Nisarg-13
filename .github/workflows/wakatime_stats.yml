@@ -17,9 +17,8 @@ concurrency:
 jobs:
   update-readme:
     name: Update Readme with Metrics
-    env:
-      WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,9 +26,36 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
+      - name: Refresh WakaTime OAuth token
+        id: waka_token
+        env:
+          WAKA_CLIENT_ID: ${{ secrets.WAKA_CLIENT_ID }}
+          WAKA_CLIENT_SECRET: ${{ secrets.WAKA_CLIENT_SECRET }}
+          WAKA_REFRESH_TOKEN: ${{ secrets.WAKA_REFRESH_TOKEN }}
+        run: |
+          resp=$(curl -sS -X POST https://wakatime.com/oauth/token \
+            --data-urlencode "client_id=${WAKA_CLIENT_ID}" \
+            --data-urlencode "client_secret=${WAKA_CLIENT_SECRET}" \
+            --data-urlencode "grant_type=refresh_token" \
+            --data-urlencode "refresh_token=${WAKA_REFRESH_TOKEN}")
+          token=$(printf '%s' "$resp" | sed -n 's/.*access_token=\([^&]*\).*/\1/p')
+          if [ -z "$token" ]; then
+            token=$(printf '%s' "$resp" | jq -r '.access_token // empty' 2>/dev/null || true)
+          fi
+          if [ -z "$token" ]; then
+            echo "Failed to refresh WakaTime token (response redacted)." >&2
+            exit 1
+          fi
+          echo "::add-mask::$token"
+          echo "token=$token" >> "$GITHUB_OUTPUT"
+          new_refresh=$(printf '%s' "$resp" | sed -n 's/.*refresh_token=\([^&]*\).*/\1/p')
+          if [ -n "$new_refresh" ] && [ "$new_refresh" != "$WAKA_REFRESH_TOKEN" ]; then
+            echo "::warning::WakaTime rotated the refresh token; update WAKA_REFRESH_TOKEN or the next run will fail."
+          fi
+
       - uses: anmol098/waka-readme-stats@master
         with:
-          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+          WAKATIME_API_KEY: ${{ steps.waka_token.outputs.token }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           SHOW_COMMIT: "True"
           SHOW_DAYS_OF_WEEK: "True"
